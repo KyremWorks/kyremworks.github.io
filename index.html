@@ -445,6 +445,52 @@ class Component extends DCLogic {
     }, current === 'dark' ? 'light' : 'dark');
   };
 
+  openMenu = () => this.setState({ menuOpen: true });
+  closeMenu = () => this.setState({ menuOpen: false });
+
+  // Fade the video-thumbnail overlay in/out on hover.
+  thumbEnter = (event) => { const overlay = event.currentTarget.querySelector('[data-ov]'); if(overlay) overlay.style.opacity = '1'; };
+  thumbLeave = (event) => { const overlay = event.currentTarget.querySelector('[data-ov]'); if(overlay) overlay.style.opacity = '0'; };
+
+  // Contact form submit — gated on the hCaptcha token, posted to Web3Forms.
+  submit = async (event) => {
+    event.preventDefault();
+    if(this.state.sending) return;
+    const form = event.target;
+    const captchaToken = form.querySelector('textarea[name="h-captcha-response"]');
+    if(!captchaToken || !captchaToken.value){ this.setState({ captchaError: true }); return; }
+    const formData = new FormData(form);
+    this.setState({ sending: true, error: null, captchaError: false });
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
+      const result = await response.json();
+      if(result.success){
+        this.setState({ sent: true, sending: false });
+      } else {
+        this.setState({ error: result.message || 'Something went wrong. Please try again.', sending: false });
+        if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
+      }
+    } catch(networkError) {
+      this.setState({ error: 'Network error, please check your connection and try again.', sending: false });
+      if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
+    }
+  };
+
+  reset = () => {
+    if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
+    this.setState({ sent: false, error: null, captchaError: false });
+  };
+
+  scrollRight = () => {
+    const track = this.trackRef.current;
+    if (track) track.scrollBy({ left: track.clientWidth * 0.8, behavior: 'smooth' });
+  };
+
+  scrollLeft = () => {
+    const track = this.trackRef.current;
+    if (track) track.scrollBy({ left: -track.clientWidth * 0.5, behavior: 'smooth' });
+  };
+
   renderVals(){
     // Card data lives in scripts/kw-cards.js; here we just attach the built
     // media element to a fresh copy of each entry for the <sc-for> loops.
@@ -452,68 +498,22 @@ class Component extends DCLogic {
     const commissions = KW.content.commissions.map(commission => ({ ...commission, media: KW.buildCommissionMedia(commission) }));
 
     return {
-      projects,
-      commissions,
-      stars: KW.makeStars(70, 7),
-      sent: this.state.sent,
+      // data
+      projects, commissions, stars: KW.makeStars(70, 7),
+      // state flags read by the template
+      sent: this.state.sent, sending: this.state.sending,
+      error: this.state.error, captchaError: this.state.captchaError,
       menuOpen: this.state.menuOpen,
-      toggleTheme: this.toggleTheme,
-      wordRef: this.wordRef,
-      stageRef: this.stageRef,
-      trackRef: this.trackRef,
-      playerRef: this.playerRef,
-      overlayRef: this.overlayRef,
-      veilRef: this.veilRef,
-      lampRef: this.lampRef,
-      charRef: this.charRef,
-      fireRef: this.fireRef,
-      glowRef: this.glowRef,
-      scrollLeft: this.scrollLeft,
-      scrollRight: this.scrollRight,
-      sending: this.state.sending,
-      error: this.state.error,
-      captchaError: this.state.captchaError,
-      formWrapRef: this.formWrapRef,
-      openMenu: () => this.setState({menuOpen:true}),
-      closeMenu: () => this.setState({menuOpen:false}),
-      // Fade the video-thumbnail overlay in/out on hover.
-      thumbEnter: (event)=>{ const overlay=event.currentTarget.querySelector('[data-ov]'); if(overlay) overlay.style.opacity='1'; },
-      thumbLeave: (event)=>{ const overlay=event.currentTarget.querySelector('[data-ov]'); if(overlay) overlay.style.opacity='0'; },
-      // Contact form submit — gated on the hCaptcha token, posted to Web3Forms.
-      submit: async (event) => {
-        event.preventDefault();
-        if(this.state.sending) return;
-        const form = event.target;
-        const captchaToken = form.querySelector('textarea[name="h-captcha-response"]');
-        if(!captchaToken || !captchaToken.value){ this.setState({ captchaError: true }); return; }
-        const formData = new FormData(form);
-        this.setState({ sending: true, error: null, captchaError: false });
-        try {
-          const response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
-          const result = await response.json();
-          if(result.success){
-            this.setState({ sent: true, sending: false });
-          } else {
-            this.setState({ error: result.message || 'Something went wrong. Please try again.', sending: false });
-            if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
-          }
-        } catch(networkError) {
-          this.setState({ error: 'Network error, please check your connection and try again.', sending: false });
-          if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
-        }
-      },
-      reset: () => {
-        if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
-        this.setState({ sent: false, error: null, captchaError: false });
-      },
-      scrollRight: () => {
-        const track = this.trackRef.current;
-        if (track) track.scrollBy({ left: track.clientWidth * 0.8, behavior: 'smooth' });
-      },
-      scrollLeft: () => {
-        const track = this.trackRef.current;
-        if (track) track.scrollBy({ left: -track.clientWidth * 0.5, behavior: 'smooth' });
-      }
+      // refs handed to the KW.* modules / DOM
+      wordRef: this.wordRef, stageRef: this.stageRef, trackRef: this.trackRef,
+      playerRef: this.playerRef, formWrapRef: this.formWrapRef,
+      overlayRef: this.overlayRef, veilRef: this.veilRef, lampRef: this.lampRef,
+      charRef: this.charRef, fireRef: this.fireRef, glowRef: this.glowRef,
+      // handlers
+      toggleTheme: this.toggleTheme, openMenu: this.openMenu, closeMenu: this.closeMenu,
+      thumbEnter: this.thumbEnter, thumbLeave: this.thumbLeave,
+      submit: this.submit, reset: this.reset,
+      scrollLeft: this.scrollLeft, scrollRight: this.scrollRight
     };
   }
 }
