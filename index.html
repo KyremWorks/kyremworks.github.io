@@ -12,6 +12,7 @@
 <script defer src="scripts/kw-stars.js"></script>
 <script defer src="scripts/kw-player.js"></script>
 <script defer src="scripts/kw-cards.js"></script>
+<script defer src="scripts/kw-reveal.js"></script>
 </head>
 <body>
 <x-dc>
@@ -96,13 +97,13 @@
   <header id="top" class="hero">
     <div class="hero-stars">{{ stars }}</div>
     <div class="hero-inner">
-      <div class="hero-eyebrow">
+      <div class="hero-eyebrow reveal">
         <span class="hero-eyebrow-rule"></span>
         Game Developer
         <span class="hero-eyebrow-rule"></span>
       </div>
-      <h1 class="hero-title">Design with <em><span ref="{{ wordRef }}">life</span><span aria-hidden="true" class="hero-cursor"></span></em></h1>
-      <p class="hero-lede">Worlds made to be felt. I build games and share the whole process along the way.</p>
+      <h1 class="hero-title reveal d1">Design with <em><span ref="{{ wordRef }}">life</span><span aria-hidden="true" class="hero-cursor"></span></em></h1>
+      <p class="hero-lede reveal d2">Worlds made to be felt. I build games and share the whole process along the way.</p>
       <div class="hero-cta-row">
         <a href="#work" class="hero-cta-primary">See the work</a>
         <a href="#channel" class="hero-cta-secondary">Watch the process<span class="play-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"></path></svg></span></a>
@@ -118,15 +119,15 @@
   <section id="about">
     <div class="section-head about-head">
       <span class="section-index">01</span>
-      <h2 class="section-heading">Who I am</h2>
+      <h2 class="section-heading reveal-words">Who I am</h2>
     </div>
     <div id="about-grid">
 
       <!-- story -->
       <div class="about-story">
-        <p class="about-lead">I'm a solo developer from Italy. Gone from passion to a life style.</p>
-        <p class="about-text">It began with curiosity: I observed how things worked, and tried making my own. Curiosity turned into modding, modding turned into real games. Small, humor dense pixel worlds I could call mine.</p>
-        <p class="about-text">Now I create experiences and tell it out loud with each devlog, game jam and rough prototype. A life long ongoing project.</p>
+        <p class="about-lead reveal-words">I'm a solo developer from Italy. Gone from passion to a life style.</p>
+        <p class="about-text reveal-words">It began with curiosity: I observed how things worked, and tried making my own. Curiosity turned into modding, modding turned into real games. Small, humor dense pixel worlds I could call mine.</p>
+        <p class="about-text reveal-words">Now I create experiences and tell it out loud with each devlog, game jam and rough prototype. A life long ongoing project.</p>
         
         <a href="#contact" class="about-link">Want to work together? Let's talk <span class="about-link-arrow">→</span></a>
       </div>
@@ -193,7 +194,7 @@
     <div id="work-head">
       <div class="section-head">
         <span class="section-index">02</span>
-        <h2 class="section-heading">Selected work</h2>
+        <h2 class="section-heading reveal-words">Selected work</h2>
       </div>
       <div class="card-nav">
         <button class="cards-scroll-btn left" onclick="{{ scrollLeft }}">←</button>
@@ -247,11 +248,11 @@
     <div id="pixel-head">
       <div class="section-head">
         <span class="section-index">03</span>
-        <h2 class="section-heading">Pixel art, on commission</h2>
+        <h2 class="section-heading reveal-words">Pixel art, on commission</h2>
       </div>
       <a href="https://www.fiverr.com/kyremworks" target="_blank" rel="noopener" class="fiverr-link">Hire me on Fiverr <span class="fiverr-link-arrow">↗</span></a>
     </div>
-    <p class="pixelart-intro">I take commissions for pixel-art environments, from cosy taverns to overgrown labs. The ones here are personal studies, each built to chase a mood, with the full process behind it.</p>
+    <p class="pixelart-intro reveal-words">I take commissions for pixel-art environments, from cosy taverns to overgrown labs. The ones here are personal studies, each built to chase a mood, with the full process behind it.</p>
     <div id="pixelart-grid">
       <sc-for list="{{ commissions }}" as="c" hint-placeholder-count="4">
         <figure class="commission-figure">
@@ -272,12 +273,12 @@
   <section id="channel">
     <div class="section-head channel-head">   
       <span class="section-index">04</span>
-      <h2 class="section-heading">I share my thinking out loud</h2>
+      <h2 class="section-heading reveal-words">I share my thinking out loud</h2>
     </div>
     <div id="channel-grid">
       <div class="channel-copy">
-        <p class="channel-lead">It all starts as a rough idea, and I film the whole way to a finished build.</p>
-        <p class="channel-text">The devlogs are where I think out loud, and the editing carries its own rhythm of pacing, cuts and sound. Watching a game come together should feel as good as playing it.</p>
+        <p class="channel-lead reveal-words">It all starts as a rough idea, and I film the whole way to a finished build.</p>
+        <p class="channel-text reveal-words">The devlogs are where I think out loud, and the editing carries its own rhythm of pacing, cuts and sound. Watching a game come together should feel as good as playing it.</p>
         <div class="channel-meta">
           <span>Devlogs</span><span class="channel-meta-dot">·</span><span>Editing</span><span class="channel-meta-dot">·</span><span>Behind every build</span>
         </div>
@@ -299,9 +300,9 @@
     <div id="contact-inner">
       <div class="section-head contact-head">
         <span class="section-index">05</span>
-        <h2 class="section-heading">Let's make something</h2>
+        <h2 class="section-heading reveal-words">Let's make something</h2>
       </div>
-      <p class="contact-intro">Got an idea, a collab, or just want to say hi? Drop a line.</p>
+      <p class="contact-intro reveal-words">Got an idea, a collab, or just want to say hi? Drop a line.</p>
 
       <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
         <div class="sent-state">
@@ -405,6 +406,7 @@ class Component extends DCLogic {
     KW.theme.apply(saved);
     this._typewriter = KW.startTypewriter(() => this.wordRef.current);
     this._player = KW.startPlayer(this.stageRef.current, this.playerRef.current);
+    KW.reveal();
     this.loadWeb3Forms();
   }
 
@@ -445,6 +447,52 @@ class Component extends DCLogic {
     }, current === 'dark' ? 'light' : 'dark');
   };
 
+  openMenu = () => this.setState({ menuOpen: true });
+  closeMenu = () => this.setState({ menuOpen: false });
+
+  // Fade the video-thumbnail overlay in/out on hover.
+  thumbEnter = (event) => { const overlay = event.currentTarget.querySelector('[data-ov]'); if(overlay) overlay.style.opacity = '1'; };
+  thumbLeave = (event) => { const overlay = event.currentTarget.querySelector('[data-ov]'); if(overlay) overlay.style.opacity = '0'; };
+
+  // Contact form submit — gated on the hCaptcha token, posted to Web3Forms.
+  submit = async (event) => {
+    event.preventDefault();
+    if(this.state.sending) return;
+    const form = event.target;
+    const captchaToken = form.querySelector('textarea[name="h-captcha-response"]');
+    if(!captchaToken || !captchaToken.value){ this.setState({ captchaError: true }); return; }
+    const formData = new FormData(form);
+    this.setState({ sending: true, error: null, captchaError: false });
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
+      const result = await response.json();
+      if(result.success){
+        this.setState({ sent: true, sending: false });
+      } else {
+        this.setState({ error: result.message || 'Something went wrong. Please try again.', sending: false });
+        if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
+      }
+    } catch(networkError) {
+      this.setState({ error: 'Network error, please check your connection and try again.', sending: false });
+      if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
+    }
+  };
+
+  reset = () => {
+    if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
+    this.setState({ sent: false, error: null, captchaError: false });
+  };
+
+  scrollRight = () => {
+    const track = this.trackRef.current;
+    if (track) track.scrollBy({ left: track.clientWidth * 0.8, behavior: 'smooth' });
+  };
+
+  scrollLeft = () => {
+    const track = this.trackRef.current;
+    if (track) track.scrollBy({ left: -track.clientWidth * 0.5, behavior: 'smooth' });
+  };
+
   renderVals(){
     // Card data lives in scripts/kw-cards.js; here we just attach the built
     // media element to a fresh copy of each entry for the <sc-for> loops.
@@ -452,68 +500,22 @@ class Component extends DCLogic {
     const commissions = KW.content.commissions.map(commission => ({ ...commission, media: KW.buildCommissionMedia(commission) }));
 
     return {
-      projects,
-      commissions,
-      stars: KW.makeStars(70, 7),
-      sent: this.state.sent,
+      // data
+      projects, commissions, stars: KW.makeStars(70, 7),
+      // state flags read by the template
+      sent: this.state.sent, sending: this.state.sending,
+      error: this.state.error, captchaError: this.state.captchaError,
       menuOpen: this.state.menuOpen,
-      toggleTheme: this.toggleTheme,
-      wordRef: this.wordRef,
-      stageRef: this.stageRef,
-      trackRef: this.trackRef,
-      playerRef: this.playerRef,
-      overlayRef: this.overlayRef,
-      veilRef: this.veilRef,
-      lampRef: this.lampRef,
-      charRef: this.charRef,
-      fireRef: this.fireRef,
-      glowRef: this.glowRef,
-      scrollLeft: this.scrollLeft,
-      scrollRight: this.scrollRight,
-      sending: this.state.sending,
-      error: this.state.error,
-      captchaError: this.state.captchaError,
-      formWrapRef: this.formWrapRef,
-      openMenu: () => this.setState({menuOpen:true}),
-      closeMenu: () => this.setState({menuOpen:false}),
-      // Fade the video-thumbnail overlay in/out on hover.
-      thumbEnter: (event)=>{ const overlay=event.currentTarget.querySelector('[data-ov]'); if(overlay) overlay.style.opacity='1'; },
-      thumbLeave: (event)=>{ const overlay=event.currentTarget.querySelector('[data-ov]'); if(overlay) overlay.style.opacity='0'; },
-      // Contact form submit — gated on the hCaptcha token, posted to Web3Forms.
-      submit: async (event) => {
-        event.preventDefault();
-        if(this.state.sending) return;
-        const form = event.target;
-        const captchaToken = form.querySelector('textarea[name="h-captcha-response"]');
-        if(!captchaToken || !captchaToken.value){ this.setState({ captchaError: true }); return; }
-        const formData = new FormData(form);
-        this.setState({ sending: true, error: null, captchaError: false });
-        try {
-          const response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
-          const result = await response.json();
-          if(result.success){
-            this.setState({ sent: true, sending: false });
-          } else {
-            this.setState({ error: result.message || 'Something went wrong. Please try again.', sending: false });
-            if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
-          }
-        } catch(networkError) {
-          this.setState({ error: 'Network error, please check your connection and try again.', sending: false });
-          if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
-        }
-      },
-      reset: () => {
-        if(window.hcaptcha) try { window.hcaptcha.reset(); } catch(_){}
-        this.setState({ sent: false, error: null, captchaError: false });
-      },
-      scrollRight: () => {
-        const track = this.trackRef.current;
-        if (track) track.scrollBy({ left: track.clientWidth * 0.8, behavior: 'smooth' });
-      },
-      scrollLeft: () => {
-        const track = this.trackRef.current;
-        if (track) track.scrollBy({ left: -track.clientWidth * 0.5, behavior: 'smooth' });
-      }
+      // refs handed to the KW.* modules / DOM
+      wordRef: this.wordRef, stageRef: this.stageRef, trackRef: this.trackRef,
+      playerRef: this.playerRef, formWrapRef: this.formWrapRef,
+      overlayRef: this.overlayRef, veilRef: this.veilRef, lampRef: this.lampRef,
+      charRef: this.charRef, fireRef: this.fireRef, glowRef: this.glowRef,
+      // handlers
+      toggleTheme: this.toggleTheme, openMenu: this.openMenu, closeMenu: this.closeMenu,
+      thumbEnter: this.thumbEnter, thumbLeave: this.thumbLeave,
+      submit: this.submit, reset: this.reset,
+      scrollLeft: this.scrollLeft, scrollRight: this.scrollRight
     };
   }
 }
