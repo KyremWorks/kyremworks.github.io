@@ -1,12 +1,12 @@
 /* Theme tokens and the colour-tween used by the lamplighter transition.
    Exposes window.KW.theme. The token values here must match the :root and
-   html[data-theme="dark"] blocks in styles/base.css. */
+   html[data-theme="dark"] blocks in styles/core.css. */
 (function () {
   window.KW = window.KW || {};
 
   var PALETTE = {
-    light: { '--bg':'#ECEDF0','--surface-1':'#F5F6F8','--surface-2':'#ECEDF0','--ink':'#16171C','--muted':'#54585F','--line-rgb':'22,23,28','--nav-bg':'rgba(236,237,240,0.72)','--btn-bg':'#16171C','--btn-fg':'#ECEDF0','--input-focus':'#ffffff','--tl-line':'rgba(22,23,28,0.22)','--tl-node':'#16171C','--tl-hollow':'#ffffff' },
-    dark:  { '--bg':'#111019','--surface-1':'#16141f','--surface-2':'#1a1825','--ink':'#ECEDF0','--muted':'#A7AAB6','--line-rgb':'236,237,240','--nav-bg':'rgba(16,15,24,0.74)','--btn-bg':'#ECEDF0','--btn-fg':'#16171C','--input-focus':'#23212e','--tl-line':'rgba(236,237,240,0.26)','--tl-node':'#ECEDF0','--tl-hollow':'#111019' }
+    light: { '--bg':'#ECEDF0','--surface-1':'#F5F6F8','--surface-2':'#ECEDF0','--ink':'#16171C','--muted':'#54585F','--gold':'#836417','--soft':'#63676F','--line-rgb':'22,23,28','--nav-bg':'rgba(236,237,240,0.72)','--btn-bg':'#16171C','--btn-fg':'#ECEDF0','--input-focus':'#ffffff','--tl-line':'rgba(22,23,28,0.22)','--tl-node':'#16171C','--tl-hollow':'#ffffff' },
+    dark:  { '--bg':'#111019','--surface-1':'#16141f','--surface-2':'#1a1825','--ink':'#ECEDF0','--muted':'#A7AAB6','--gold':'#C2942B','--soft':'#9A9EA8','--line-rgb':'236,237,240','--nav-bg':'rgba(16,15,24,0.74)','--btn-bg':'#ECEDF0','--btn-fg':'#16171C','--input-focus':'#23212e','--tl-line':'rgba(236,237,240,0.26)','--tl-node':'#ECEDF0','--tl-hollow':'#111019' }
   };
 
   // Parse a CSS colour into a tagged channel array so two colours of the same

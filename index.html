@@ -1,8 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="KyremWorks — solo game developer from Italy. Pixel-art games, commissioned environments and devlogs that show the whole process.">
+<!-- Warm up the two latin font subsets used above the fold. -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/newsreader-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/hanken-grotesk-latin.woff2" crossorigin>
+<!-- Self-hosted React: support.js skips its unpkg fallback when window.React exists. -->
+<script src="scripts/vendor-react.js"></script>
+<script src="scripts/vendor-react-dom.js"></script>
 <script src="./support.js"></script>
 <!-- KW.* helper modules. `defer` runs them after parse but before the runtime's
      DOMContentLoaded boot, so the Component logic can call them on mount. -->
@@ -19,16 +26,8 @@
 <title>KyremWorks</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/favicon.png">
-<link rel="stylesheet" href="styles/fonts.css">
-<link rel="stylesheet" href="styles/base.css">
-<link rel="stylesheet" href="styles/layout.css">
-<link rel="stylesheet" href="styles/hero.css">
-<link rel="stylesheet" href="styles/about.css">
-<link rel="stylesheet" href="styles/work.css">
-<link rel="stylesheet" href="styles/pixelart.css">
-<link rel="stylesheet" href="styles/channel.css">
-<link rel="stylesheet" href="styles/contact.css">
-<link rel="stylesheet" href="styles/lamplighter.css">
+<link rel="stylesheet" href="styles/core.css">
+<link rel="stylesheet" href="styles/sections.css">
 <link rel="stylesheet" href="styles/responsive.css">
 </helmet>
 
@@ -70,7 +69,7 @@
       <div class="drawer-panel">
         <div class="drawer-header">
           <span class="brand-lockup">
-            <img src="assets/logo-pfp.png" alt="" class="brand-mark">
+            <img src="assets/logo-pfp.webp" alt="" class="brand-mark">
             <span>Kyrem<span class="brand-sub">Works</span></span>
           </span>
           <button onClick="{{ closeMenu }}" aria-label="Close menu" class="drawer-close">×</button>
@@ -113,6 +112,8 @@
       <span class="scroll-hint-line"></span>
     </div>
   </header>
+
+  <main>
 
   <!-- ABOUT -->
   <section id="about">
@@ -284,7 +285,7 @@
         <a href="https://www.youtube.com/@KyremWorks" target="_blank" rel="noopener" class="channel-btn">▶ @KyremWorks on YouTube</a>
       </div>
       <a href="https://youtu.be/kxjL2-XBuds?is=9tgQnLKOL1FzQpiA" target="_blank" rel="noopener" onMouseEnter="{{ thumbEnter }}" onMouseLeave="{{ thumbLeave }}" class="video-thumb">
-        <img src="assets/last-video.png" alt="Latest KyremWorks video" class="video-thumb-img">
+        <img src="assets/last-video.webp" alt="Latest KyremWorks video" loading="lazy" class="video-thumb-img">
         <div data-ov="" class="video-thumb-overlay">
           <span class="video-thumb-play">▶</span>
           <span class="video-thumb-cta">Watch the last video</span>
@@ -350,10 +351,12 @@
     </div>
   </section>
 
+  </main>
+
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="brand-lockup">
-      <img src="assets/logo-pfp.png" alt="KyremWorks" class="brand-mark">
+      <img src="assets/logo-pfp.webp" alt="KyremWorks" class="brand-mark">
       <span>Kyrem<span class="brand-sub">Works</span></span>
     </div>
     <div class="footer-links">
@@ -405,7 +408,17 @@ class Component extends DCLogic {
     KW.theme.apply(saved);
     this._typewriter = KW.startTypewriter(() => this.wordRef.current);
     this._player = KW.startPlayer(this.stageRef.current, this.playerRef.current);
-    this.loadWeb3Forms();
+    // hCaptcha + Web3Forms weigh ~900 KB: load them only when the contact
+    // section is close to the viewport instead of on page load.
+    const contact = document.getElementById('contact');
+    if(contact && 'IntersectionObserver' in window){
+      const io = new IntersectionObserver((entries) => {
+        if(entries.some(e => e.isIntersecting)){ this.loadWeb3Forms(); io.disconnect(); }
+      }, { rootMargin: '600px' });
+      io.observe(contact);
+    } else {
+      this.loadWeb3Forms();
+    }
   }
 
   componentDidUpdate(){

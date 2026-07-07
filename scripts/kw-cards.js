@@ -24,8 +24,8 @@
         tags: ["Brackeys 2026.1", "#264 / 1320", "Pixel art"],
         link: "https://kyremworks.itch.io/a-lamplighters-destiny",
         linkMsg: "Play on itch.io",
-        img: "assets/lamplighter.png",
-        previewGif: "assets/gameplay-lamplighter.gif"
+        img: "assets/lamplighter.webp",
+        preview: "assets/gameplay-lamplighter.mp4"
       },
       {
         title: "Grand Theft Hotdog",
@@ -34,8 +34,8 @@
         tags: ["In development", "Long-term"],
         link: "https://kyremworks.itch.io/grand-theft-hotdog",
         linkMsg: "Play on itch.io",
-        img: "assets/gth.png",
-        previewGif: "assets/gameplay-gth.gif"
+        img: "assets/gth.webp",
+        preview: "assets/gameplay-gth.mp4"
       },
       {
         title: "EndlessHorizons",
@@ -44,14 +44,14 @@
         tags: ["In development", "Long-term", "Ubuntu Server", "5 years"],
         link: "https://glitchvalley.it",
         linkMsg: "Learn more",
-        img: "https://glitchvalley.it/images/logo.png",
+        img: "assets/glitchvalley-logo.webp",
         previewGif: ""
       }
     ],
     commissions: [
-      { src: "assets/px-tavern.png", isVideo: false, label: "Final result", title: "Tavern interior" },
-      { src: "assets/px-lab-lapse.mp4", poster: "assets/px-lab-poster.png", isVideo: true, label: "Timelapse", title: "Abandoned laboratory" },
-      { src: "assets/px-forest-lapse.mp4", poster: "assets/px-forest-poster.png", isVideo: true, label: "Timelapse", title: "Parallax Forest" }
+      { src: "assets/px-tavern.webp", isVideo: false, label: "Final result", title: "Tavern interior" },
+      { src: "assets/px-lab-lapse.mp4", poster: "assets/px-lab-poster.webp", isVideo: true, label: "Timelapse", title: "Abandoned laboratory" },
+      { src: "assets/px-forest-lapse.mp4", poster: "assets/px-forest-poster.webp", isVideo: true, label: "Timelapse", title: "Parallax Forest" }
     ]
   };
 
@@ -92,8 +92,8 @@
       ? React.createElement('img', { key: 'v', 'data-gif': true, src: project.previewGif, alt: project.title + ' gameplay', style: Object.assign({}, FILL, { position: 'absolute', inset: 0 }) })
       : React.createElement('video', { key: 'v', 'data-src': project.preview, loop: true, muted: true, playsInline: true, preload: 'none', onPlaying: onPlaying, style: Object.assign({}, FILL, { position: 'absolute', inset: 0 }) });
     
-    var hasPreviewGif = project.previewGif && project.previewGif !== ""
-    var hoverBadgeElement = hasPreviewGif ? React.createElement('div', { key: 'h', 'data-badge': true, style: badgeStyle }, '▶  Hover to play') : null;
+    var hasPreview = Boolean(project.previewGif || project.preview);
+    var hoverBadgeElement = hasPreview ? React.createElement('div', { key: 'h', 'data-badge': true, style: badgeStyle }, '▶  Hover to play') : null;
     
     var card = React.createElement('div', { onMouseEnter: play, onMouseLeave: stop, style: { position: 'relative', width: '100%', height: '100%', cursor: 'pointer' } },
       underlay,
@@ -114,7 +114,7 @@
       return React.createElement('img', { src: commission.src, alt: commission.title, style: FILL });
     }
     return React.createElement('div', { onMouseEnter: enter, onMouseLeave: leave, style: { position: 'relative', width: '100%', height: '100%', cursor: 'pointer' } },
-      React.createElement('video', { key: 'v', src: commission.src, loop: true, muted: true, playsInline: true, preload: 'auto', style: Object.assign({}, FILL, { position: 'absolute', inset: 0 }) }),
+      React.createElement('video', { key: 'v', src: commission.src, loop: true, muted: true, playsInline: true, preload: 'none', style: Object.assign({}, FILL, { position: 'absolute', inset: 0 }) }),
       React.createElement('img', { key: 'p', src: commission.poster, alt: commission.title, style: Object.assign({}, FILL, { position: 'absolute', inset: 0, transition: 'opacity .25s ease', zIndex: 2 }) }),
       React.createElement('div', { key: 'h', style: Object.assign({ position: 'absolute', bottom: 12, right: 14, zIndex: 3, background: 'rgba(15,16,20,0.78)', backdropFilter: 'blur(4px)', color: '#ECEDF0' }, HOVER_BADGE) }, '▶  Hover to play')
     );
