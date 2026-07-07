@@ -73,6 +73,22 @@ html[data-theme="dark"] #glow{mix-blend-mode:screen}
 
 @keyframes kw-sky{from{background-position:0 0}to{background-position:-1920px 0}}
 
+/* Tapparella reveal: content wipes down on load. Add class="reveal" to a text
+   element; d1..d3 stagger siblings. Respects reduced-motion. */
+@keyframes kw-tapparella{from{clip-path:inset(0 0 100% 0);transform:translateY(-8px)}to{clip-path:inset(0 0 0 0);transform:translateY(0)}}
+.reveal{animation:kw-tapparella .5s ease both}
+.reveal.d1{animation-delay:.12s}
+.reveal.d2{animation-delay:.24s}
+.reveal.d3{animation-delay:.36s}
+@media (prefers-reduced-motion:reduce){.reveal{animation:none}}
+
+/* Word-by-word variant (scripts/kw-reveal.js splits text into .reveal-word spans).
+   Each word drops down from behind a mask, staggered by its --i index. */
+.reveal-word{display:inline-block;overflow:hidden;vertical-align:top}
+.reveal-word>span{display:inline-block;transform:translateY(-110%);transition:transform .3s ease;transition-delay:calc((var(--base,0) + var(--i))*30ms)}
+.reveal-words.is-visible .reveal-word>span{transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){.reveal-word>span{transform:none;transition:none}}
+
 /* Page shell — the single wrapper that sets the base text colour and font. */
 .site{color:var(--ink);font-family:'Hanken Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
 
