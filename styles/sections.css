@@ -1,0 +1,239 @@
+/* sections.css — per-section styles, merged from hero/about/work/pixelart/
+   channel/contact/lamplighter .css to cut render-blocking requests.
+   Section banners mark the old file boundaries. */
+
+/* ============================== hero.css =============================== */
+/* Hero: full-viewport intro with a twinkling star field, an animated
+   typewriter word in the headline, and two call-to-action buttons. */
+
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 32px 80px}
+
+/* Star field fills the hero behind the content; stars themselves are created
+   in scripts/kw-stars.js and animated with kw-twinkle (defined below). */
+.hero-stars{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+
+.hero-eyebrow{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#7A7E88;margin-bottom:34px}
+.hero-eyebrow-rule{width:26px;height:1px;background:#C2942B}
+
+.hero-title{font-family:'Newsreader',serif;font-weight:300;font-size:clamp(56px,11vw,148px);line-height:0.94;letter-spacing:-0.02em;color:var(--ink);max-width:14ch}
+.hero-title em{font-style:italic;font-weight:400;color:#514BC4;white-space:nowrap}
+/* Blinking caret after the typewriter word. */
+.hero-cursor{display:inline-block;width:0.045em;height:0.82em;background:#514BC4;margin-left:0.06em;vertical-align:-0.05em;border-radius:1px;animation:kw-blink 1.05s steps(1,end) infinite}
+
+.hero-lede{margin-top:32px;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:var(--muted);max-width:46ch;font-weight:400}
+
+.hero-cta-row{display:flex;gap:14px;margin-top:44px;flex-wrap:wrap;justify-content:center}
+.hero-cta-primary{text-decoration:none;background:var(--btn-bg);color:var(--btn-fg);font-size:15px;font-weight:600;padding:14px 28px;border-radius:100px;transition:transform .25s ease,box-shadow .25s ease,opacity .25s ease}
+.hero-cta-primary:hover{transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(20,21,30,0.55);opacity:0.92}
+.hero-cta-secondary{text-decoration:none;background:transparent;color:var(--ink);font-size:15px;font-weight:600;padding:14px 28px;border-radius:100px;border:1px solid rgba(var(--line-rgb),0.2);transition:background .25s ease,transform .25s ease,border-color .25s ease;display:inline-flex;align-items:center}
+.hero-cta-secondary:hover{background:rgba(var(--line-rgb),0.07);transform:translateY(-2px);border-color:rgba(var(--line-rgb),0.34)}
+/* Play glyph that slides open when the secondary CTA is hovered. */
+.hero-cta-secondary .play-ico{display:inline-flex;align-items:center;max-width:0;opacity:0;margin-left:0;overflow:hidden;transition:max-width .3s ease,opacity .3s ease,margin-left .3s ease}
+.hero-cta-secondary:hover .play-ico{max-width:22px;opacity:1;margin-left:9px}
+
+.scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#9A9EA8;display:flex;flex-direction:column;align-items:center;gap:8px}
+.scroll-hint-line{width:1px;height:34px;background:linear-gradient(#9A9EA8,transparent)}
+
+@keyframes kw-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes kw-twinkle{0%,100%{opacity:.25}50%{opacity:.9}}
+
+/* ============================== about.css ============================== */
+/* About: a story column beside a git-style "commit tree" timeline drawn with
+   an inline SVG. Theme-aware strokes/fills use the --tl-* tokens. */
+
+#about{max-width:1200px;margin:0 auto;padding:120px 40px}
+.about-head{margin-bottom:70px}
+#about-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:80px;align-items:start}
+
+/* ---- Story column ---- */
+.about-story{display:flex;flex-direction:column;gap:24px;max-width:31em}
+.about-lead{font-family:'Newsreader',serif;font-size:clamp(23px,2.5vw,31px);line-height:1.4;font-weight:400;color:var(--ink);text-wrap:pretty}
+.about-text{font-size:16px;line-height:1.75;color:var(--muted);text-wrap:pretty}
+.about-meta{display:flex;align-items:center;gap:12px;margin-top:8px;font-size:13px;color:#9A9EA8;font-family:ui-monospace,'SF Mono',Menlo,monospace}
+.about-meta-dot{opacity:0.5}
+.about-link{margin-top:10px;align-self:flex-start;text-decoration:none;color:var(--ink);font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid rgba(var(--line-rgb),0.3);padding-bottom:3px;transition:gap .25s ease}
+.about-link:hover{gap:12px}
+.about-link-arrow{color:#C2942B}
+
+/* ---- Commit-tree timeline ---- */
+.timeline{position:relative;min-height:480px;padding-top:6px}
+.timeline-svg{position:absolute;left:0;top:0;overflow:visible}
+/* Theme-aware trunk and commit nodes (literal-colour branch/HEAD strokes stay
+   as SVG presentation attributes in the markup). */
+.tl-line{stroke:var(--tl-line)}
+.tl-node{fill:var(--tl-node)}
+.tl-hollow{fill:var(--tl-hollow)}
+
+/* Each labelled commit is absolutely placed to line up with its SVG node. */
+.timeline-entry{position:absolute;left:92px;transform:translateY(-50%)}
+.timeline-entry:nth-child(2){top:70px}
+.timeline-entry:nth-child(3){top:180px}
+.timeline-entry:nth-child(4){top:290px}
+.timeline-entry:nth-child(5){top:400px}
+.timeline-row{display:flex;align-items:center;gap:8px}
+.timeline-year{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;font-weight:600;letter-spacing:0.05em;color:var(--gold)}
+.timeline-year--branch{color:#514BC4}
+.timeline-tag{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:10px;font-weight:600;letter-spacing:0.04em;color:#514BC4;border:1px solid rgba(81,75,196,0.35);border-radius:5px;padding:1px 6px}
+.timeline-tag--head{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:10px;font-weight:700;letter-spacing:0.06em;color:#16171C;background:#C2942B;border-radius:5px;padding:2px 7px}
+.timeline-title{font-family:'Newsreader',serif;font-size:20px;line-height:1.25;color:var(--ink);margin-top:3px}
+.timeline-desc{font-size:13px;line-height:1.5;color:var(--soft);margin-top:3px}
+
+/* ============================== work.css =============================== */
+/* Selected work: a dark, horizontally-scrolling carousel of project cards
+   followed by a draggable pixel-art player sprite and a contact CTA.
+   This section is dark by design in both themes, so colours are literal. */
+
+#work{padding:120px 0 130px;background:#16171C;color:#ECEDF0;position:relative}
+#work-head{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:54px}
+/* Gold/light variants of the shared section header on this dark background. */
+#work .section-index{color:#D9AE45}
+#work .section-heading{color:#F5F6F8}
+
+/* ---- Card carousel ---- */
+.work-track{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 40px 30px;scrollbar-width:none;scroll-padding-left:40px}
+
+.project-card{scroll-snap-align:start;flex:0 0 clamp(320px,46vw,560px);background:#1F2027;border:1px solid rgba(236,237,240,0.1);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.project-card:hover{transform:translateY(-5px);border-color:rgba(236,237,240,0.24);box-shadow:0 20px 44px -22px rgba(0,0,0,0.65)}
+.project-card img{transition:transform .45s ease}
+.project-card:hover img{transform:scale(1.04)}
+.project-media{position:relative;aspect-ratio:3/2;overflow:hidden;background:#0F1014}
+.project-badge{position:absolute;top:16px;left:16px;background:rgba(15,16,20,0.78);backdrop-filter:blur(4px);color:#ECEDF0;font-size:12px;font-weight:600;letter-spacing:0.06em;padding:6px 12px;border-radius:100px}
+.project-body{padding:30px 30px 32px;display:flex;flex-direction:column;gap:14px;flex:1}
+.project-title{font-family:'Newsreader',serif;font-weight:400;font-size:28px;letter-spacing:-0.01em;color:#F5F6F8}
+.project-desc{font-size:15px;line-height:1.6;color:#A6AAB4;flex:1}
+.project-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.tag{font-size:12px;font-weight:600;letter-spacing:0.03em;color:#D9AE45;border:1px solid rgba(217,174,69,0.4);padding:5px 11px;border-radius:100px}
+.project-link{margin-top:14px;text-decoration:none;color:#ECEDF0;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;border-bottom:1px solid rgba(236,237,240,0.3);padding-bottom:3px}
+.project-link-arrow{color:#D9AE45}
+/* Work is always dark, so these use literal light colours (not theme vars). */
+.cards-scroll-btn{text-decoration:none;background:transparent;color:#ECEDF0;font-size:15px;font-weight:600;padding:14px 28px;border-radius:100px;border:1px solid rgba(236,237,240,0.2);transition:background .25s ease,transform .25s ease,border-color .25s ease;display:inline-flex;align-items:center}
+.cards-scroll-btn:hover{background:rgba(236,237,240,0.07);transform:translateX(2px);border-color:rgba(236,237,240,0.34)}
+.cards-scroll-btn:hover.left{transform:translateX(-2px);}
+.card-nav {
+   display: flex;
+   gap: 1vw;
+}
+/* Dashed "more on itch.io" card pinned to the end of the carousel. */
+.end-card{scroll-snap-align:start;flex:0 0 clamp(260px,32vw,360px);text-decoration:none;border:1px dashed rgba(236,237,240,0.28);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#ECEDF0;text-align:center;padding:40px;transition:border-color .28s ease,transform .28s ease,background .28s ease}
+.end-card:hover{border-color:rgba(236,237,240,0.55);transform:translateY(-4px);background:rgba(236,237,240,0.03)}
+.end-card-icon{width:54px;height:54px;border-radius:50%;border:1px solid rgba(236,237,240,0.3);display:flex;align-items:center;justify-content:center;font-size:22px}
+.end-card-title{font-family:'Newsreader',serif;font-size:22px}
+.end-card-sub{font-size:14px;color:#A6AAB4}
+
+/* ---- Player sprite + contact CTA ---- */
+.work-outro{max-width:600px;margin:60px auto 0;padding:0 40px}
+/* Stage the sprite walks across; the sprite's position/frame are driven
+   imperatively by scripts/kw-player.js — only its initial frame lives here. */
+.player-stage{position:relative;height:80px;pointer-events:none;z-index:2}
+.player-sprite{position:absolute;left:0;bottom:0;width:76px;height:76px;background-image:url(../assets/player-sheet-sm.png);background-repeat:no-repeat;background-size:2280px 76px;background-position:0 0;image-rendering:pixelated;transform-origin:50% 100%;will-change:transform;cursor:grab;pointer-events:auto;touch-action:none}
+
+.work-contact{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:13px;text-decoration:none;background:rgba(129,108,235,0.1);border:1px solid rgba(150,138,235,0.32);border-radius:18px;padding:30px 34px;transition:border-color .3s ease,transform .3s ease,background .3s ease}
+.work-contact:hover{border-color:rgba(150,138,235,0.55);background:rgba(129,108,235,0.15);transform:translateY(-3px)}
+.work-contact-title{font-family:'Newsreader',serif;font-size:clamp(22px,2.6vw,28px);line-height:1.25;color:#F5F6F8}
+.work-contact-desc{font-size:15px;line-height:1.55;color:#A6AAB4;max-width:40ch}
+.work-contact-btn{margin-top:4px;display:inline-flex;align-items:center;gap:9px;background:rgba(150,138,235,0.16);border:1px solid rgba(150,138,235,0.42);color:#ECEDF0;font-size:15px;font-weight:600;padding:12px 24px;border-radius:100px}
+.work-contact-arrow{color:#B9AEF2}
+
+/* ============================== pixelart.css =========================== */
+/* Pixel art: a two-column grid of commission "concept study" figures, each a
+   dark card with a media area, a corner label, and a caption. */
+
+#pixelart{max-width:1200px;margin:0 auto;padding:120px 40px}
+#pixel-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:18px}
+.fiverr-link{text-decoration:none;color:var(--ink);font-size:14px;font-weight:600;border:1px solid rgba(var(--line-rgb),0.2);padding:11px 22px;border-radius:100px;display:inline-flex;align-items:center;gap:9px;transition:background .25s ease,transform .25s ease,border-color .25s ease}
+.fiverr-link:hover{background:rgba(var(--line-rgb),0.07);transform:translateY(-2px);border-color:rgba(var(--line-rgb),0.34)}
+.fiverr-link-arrow{color:#C2942B}
+.pixelart-intro{font-size:17px;line-height:1.6;color:var(--muted);max-width:54ch;margin-bottom:50px}
+
+#pixelart-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.commission-figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid rgba(var(--line-rgb),0.1);background:#16171C;position:relative;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.commission-figure:hover{transform:translateY(-5px);border-color:rgba(var(--line-rgb),0.24);box-shadow:0 20px 44px -24px rgba(0,0,0,0.4)}
+.commission-figure img{transition:transform .5s ease}
+.commission-figure:hover img{transform:scale(1.05)}
+.commission-media{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0F1014}
+.commission-label{position:absolute;top:14px;left:14px;background:rgba(15,16,20,0.78);backdrop-filter:blur(4px);color:#D9AE45;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 11px;border-radius:100px}
+.commission-caption{padding:18px 22px;font-size:15px;font-weight:600;color:#ECEDF0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.commission-note{font-size:13px;color:#7C808A;font-weight:500}
+
+/* ============================== channel.css ============================ */
+/* Channel: a copy column beside a YouTube thumbnail whose dark overlay fades
+   in on hover (toggled by the thumbEnter/thumbLeave handlers via [data-ov]). */
+
+#channel{max-width:1200px;margin:0 auto;padding:120px 40px 120px;border-top:1px solid rgba(var(--line-rgb),0.08)}
+.channel-head{margin-bottom:54px}
+#channel-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center}
+
+/* ---- Copy column ---- */
+.channel-copy{display:flex;flex-direction:column;gap:26px}
+.channel-lead{font-family:'Newsreader',serif;font-size:clamp(22px,2.4vw,30px);line-height:1.4;font-weight:400;color:var(--ink)}
+.channel-text{font-size:16px;line-height:1.7;color:var(--muted)}
+.channel-meta{display:flex;align-items:center;gap:12px;margin-top:2px;font-size:13px;color:var(--soft);font-family:ui-monospace,'SF Mono',Menlo,monospace}
+.channel-meta-dot{opacity:0.5}
+.channel-btn{margin-top:10px;text-decoration:none;align-self:flex-start;background:var(--btn-bg);color:var(--btn-fg);font-size:15px;font-weight:600;padding:14px 26px;border-radius:100px;display:inline-flex;align-items:center;gap:10px;transition:transform .25s ease,box-shadow .25s ease,opacity .25s ease}
+.channel-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(20,21,30,0.55);opacity:0.92}
+
+/* ---- Video thumbnail ---- */
+.video-thumb{text-decoration:none;position:relative;aspect-ratio:16/10;border-radius:16px;overflow:hidden;background:#16171C;display:block;border:1px solid rgba(var(--line-rgb),0.1)}
+.video-thumb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.video-thumb-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,16,20,0.88),rgba(15,16,20,0.1) 60%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;opacity:0;transition:opacity .25s ease;pointer-events:none}
+.video-thumb-play{width:72px;height:72px;border-radius:50%;background:#C2942B;color:#15161b;display:flex;align-items:center;justify-content:center;font-size:28px;padding-left:5px;box-shadow:0 12px 40px rgba(194,148,43,0.4)}
+.video-thumb-cta{font-family:'Newsreader',serif;font-size:22px;letter-spacing:0.01em;color:#ECEDF0}
+.video-thumb-badge{position:absolute;top:14px;left:14px;z-index:2;background:rgba(15,16,20,0.7);backdrop-filter:blur(4px);color:#ECEDF0;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 11px;border-radius:100px;pointer-events:none}
+
+/* Sizing for an x-import'd media slot, were one ever dropped into the grid. */
+#channel-grid a > .sc-host-x{position:absolute;inset:0;width:100%;height:100%}
+#channel-grid image-slot{display:block !important;width:100% !important;height:100% !important}
+
+/* ============================== contact.css ============================ */
+/* Contact: the message form plus the post-submit "sent" confirmation card.
+   The form stays mounted while sent (toggled via display) so the hCaptcha
+   widget never has to re-render — see componentDidUpdate in the logic. */
+
+#contact{background:var(--surface-1);border-top:1px solid rgba(var(--line-rgb),0.08)}
+#contact-inner{max-width:980px;margin:0 auto;padding:120px 40px 130px}
+.contact-head{margin-bottom:18px}
+/* This section's heading runs larger than the shared default. */
+#contact .section-heading{font-size:clamp(32px,5vw,58px)}
+.contact-intro{font-size:17px;line-height:1.6;color:var(--muted);max-width:50ch;margin-bottom:50px}
+
+/* ---- Sent confirmation ---- */
+.sent-state{background:#16171C;color:#ECEDF0;border-radius:16px;padding:60px 40px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+.sent-icon{width:60px;height:60px;border-radius:50%;background:#C2942B;color:#15161b;display:flex;align-items:center;justify-content:center;font-size:28px}
+.sent-title{font-family:'Newsreader',serif;font-size:30px;font-weight:400}
+.sent-text{font-size:16px;color:#A6AAB4;max-width:38ch}
+.sent-again{margin-top:8px;background:transparent;border:1px solid rgba(236,237,240,0.3);color:#ECEDF0;font-size:14px;font-weight:600;padding:11px 22px;border-radius:100px;cursor:pointer}
+
+/* ---- Form ---- */
+.contact-form{display:flex;flex-direction:column;gap:26px}
+.form-botcheck{display:none}
+#contact-form-row{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.form-field{display:flex;flex-direction:column;gap:10px}
+.field-label{font-size:13px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted)}
+.field-input{font-family:inherit;font-size:16px;color:var(--ink);background:var(--surface-2);border:1px solid rgba(var(--line-rgb),0.12);border-radius:10px;padding:15px 16px;outline:none}
+.field-input:focus{border-color:#514BC4;background:var(--input-focus)}
+textarea.field-input{resize:vertical}
+.h-captcha{min-height:78px}
+.form-error{font-size:14px;color:#C25A4B;margin-top:-12px}
+.form-actions{display:flex;align-items:center;gap:18px}
+.form-submit{align-self:flex-start;background:var(--btn-bg);color:var(--btn-fg);font-size:15px;font-weight:600;padding:16px 34px;border-radius:100px;border:none;cursor:pointer;font-family:inherit;transition:transform .25s ease,box-shadow .25s ease,opacity .25s ease}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(20,21,30,0.55);opacity:0.92}
+.form-sending{font-size:14px;color:var(--muted)}
+.form-privacy-notice{font-size:13px;line-height:1.5;color:var(--muted)}
+.form-privacy-notice a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.form-privacy-notice a:hover{color:#514BC4}
+
+/* ============================== lamplighter.css ======================== */
+/* Full-screen overlay played during a theme switch: a lamplighter walks in and
+   lights (or dims) a lamp. All sprite frames, opacities and the fire image are
+   driven imperatively by scripts/kw-lamplighter.js; only the initial/resting
+   state lives here. */
+
+.lamplighter-overlay{position:fixed;inset:0;z-index:300;pointer-events:none;opacity:0;visibility:hidden;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.lamplighter-veil{position:absolute;inset:0;background:radial-gradient(130% 95% at 50% 100%,#1a1830 0%,#0b0a12 72%);opacity:0}
+.lamplighter-scene{position:absolute;left:50%;bottom:0;transform:translateX(-50%);z-index:2;display:flex;align-items:flex-end;justify-content:center}
+.lamplighter-char{position:relative;z-index:3;width:200px;height:200px;background-image:url(../assets/lamplighter-sheet.png);background-repeat:no-repeat;background-size:2200px 200px;background-position:0 0;image-rendering:pixelated;margin-right:-30px;margin-bottom:8px}
+.lamplighter-lamp-wrap{position:relative;z-index:2}
+.lamplighter-glow{position:absolute;left:65px;top:118px;width:500px;height:500px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(233,196,96,0.55),rgba(233,196,96,0.12) 44%,transparent 68%);opacity:0;pointer-events:none;z-index:1}
+.lamplighter-lamp{position:relative;z-index:2;width:130px;height:520px;background-image:url(../assets/lamp-sheet.png);background-repeat:no-repeat;background-size:1950px 520px;background-position:0 0;image-rendering:pixelated}
+.lamplighter-fire{position:absolute;z-index:3;top:92px;left:46px;width:38px;height:38px;background-image:url(../assets/fire1.png);background-size:contain;background-repeat:no-repeat;image-rendering:pixelated;opacity:0;pointer-events:none}
