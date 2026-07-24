@@ -1,0 +1,55 @@
+# robots.txt — kyremworks.github.io
+# Default: everyone else (regular search engines, browsers, tools) is welcome.
+User-agent: *
+Allow: /
+
+# ---------------------------------------------------------------
+# AI TRAINING crawlers — blocked. Content here should not be used
+# to train models.
+# ---------------------------------------------------------------
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+# ---------------------------------------------------------------
+# AI RETRIEVAL / LIVE SEARCH / user-triggered fetch — allowed.
+# These power real-time answers (ChatGPT Search, Perplexity, Claude
+# search/browse) rather than training data. Site stays visible here.
+# ---------------------------------------------------------------
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Agent
+Allow: /

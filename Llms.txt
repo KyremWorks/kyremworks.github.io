@@ -1,0 +1,33 @@
+# KyremWorks
+
+> Solo indie game developer from Italy, working under the KyremWorks brand — building pixel-art, atmospheric games and sharing the whole process through devlogs.
+
+## Background
+- 2019: first game prototype, built in Unity — rough, but the real start
+- 2021: first Minecraft plugin, built for EndlessHorizons — modding became a second, lasting branch of the work
+- 2023: started Grand Theft Hotdog, now the long-term flagship project
+- 2026: shipped "A Lamplighter's Destiny" for the Brackeys 2026.1 Game Jam, placing #264 overall
+
+## Games
+- [Grand Theft Hotdog](https://kyremworks.itch.io/grand-theft-hotdog): fast-paced 2D platformer. Frank, a truck driver, is trying to escape a giant, relentless hand and get his stolen hotdog back. Momentum-based precision movement — keep your speed up for longer jumps and to dodge an instant-death hand. Progressive difficulty across 5 planned levels, with a dynamic camera. In continuous development; devlogs documenting the process are on YouTube. Version 0.3 out.
+- [A Lamplighter's Destiny](https://kyremworks.itch.io/a-lamplighters-destiny): stealth platformer made for the Brackeys 2026.1 Game Jam, inspired by The Little Prince by Antoine de Saint-Exupéry. Hide from the Lamplighter in the shadows and escape the house before darkness gives you away. Best played via the downloadable version.
+- EndlessHorizons: a realistic Minecraft roleplay server. Custom crime, mafia, and quest systems on a Java + Spigot backend. Co-owned and built with a partner over about five years. More details: https://glitchvalley.it/
+
+## Pixel Art
+- Commission work (see Fiverr link below): cosy taverns, overgrown labs, atmospheric environment studies. Each piece is built to chase a specific mood, with the full process documented alongside it.
+
+## Tech stack
+- Godot (GDScript) for game development
+- Java + Spigot for Minecraft server systems
+- JavaScript for personal web tooling and the portfolio site
+- Audacity for game audio editing
+
+## Links
+- YouTube (devlogs, comedic tone): https://www.youtube.com/@KyremWorks
+- Itch.io: https://kyremworks.itch.io
+- Fiverr (commissions): https://it.fiverr.com/s/e6Bm2Km
+- Instagram: https://www.instagram.com/kyremworks/
+- EndlessHorizons: https://glitchvalley.it/
+
+## Optional
+- Privacy Policy: https://kyremworks.github.io/privacy.html
