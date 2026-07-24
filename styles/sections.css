@@ -140,11 +140,36 @@
    dark card with a media area, a corner label, and a caption. */
 
 #pixelart{max-width:1200px;margin:0 auto;padding:120px 40px}
-#pixel-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:18px}
-.fiverr-link{text-decoration:none;color:var(--ink);font-size:14px;font-weight:600;border:1px solid rgba(var(--line-rgb),0.2);padding:11px 22px;border-radius:100px;display:inline-flex;align-items:center;gap:9px;transition:background .25s ease,transform .25s ease,border-color .25s ease}
+#pixel-head{display:flex;align-items:flex-end;gap:3vw;flex-wrap:wrap;margin-bottom:18px}
+.fiverr-link {
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 600;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 11px 22px;
+  border: 2px solid rgba(var(--line-rgb), 0.2);
+  border-radius: 100px;
+
+  margin-left: 25px;
+  margin-bottom: 42px;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease;
+
+  box-shadow:
+    0 10px 36px rgba(0, 0, 0, 0.16),
+    0 0 0 1px rgba(0, 0, 0, 0.06);
+}
 .fiverr-link:hover{background:rgba(var(--line-rgb),0.07);transform:translateY(-2px);border-color:rgba(var(--line-rgb),0.34)}
 .fiverr-link-arrow{color:#C2942B}
-.pixelart-intro{font-size:17px;line-height:1.6;color:var(--muted);max-width:54ch;margin-bottom:50px}
+.pixelart-intro{font-size:17px;line-height:1.6;color:var(--muted);max-width:54ch;margin-bottom:20px}
 
 #pixelart-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
 .commission-figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid rgba(var(--line-rgb),0.1);background:#16171C;position:relative;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}

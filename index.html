@@ -72,8 +72,8 @@
     <div id="nav-right">
       <div id="nav-links">
         <a href="#about">About</a>
-        <a href="#work">Games</a>
-        <a href="#pixelart">Pixel art</a>
+        <a href="#work">Projects</a>
+        <a href="#pixelart">Commissions</a>
         <a href="#channel">Channel</a>
       </div>
       <button id="theme-toggle" onClick="{{ toggleTheme }}" aria-label="Toggle dark mode" title="Toggle dark mode">
@@ -128,14 +128,14 @@
         <span class="hero-eyebrow-rule"></span>
       </div>
       <h1 class="hero-title reveal d1">Design with <em><span ref="{{ wordRef }}">life</span><span aria-hidden="true" class="hero-cursor"></span></em></h1>
-      <p class="hero-lede reveal d2">Worlds made to be felt. I build games and share the whole process along the way.</p>
+      <p class="hero-lede reveal d2">Pixel art worlds made to leave a mark in your heart.<br> I build games and share the whole process along the way.</p>
       <div class="hero-cta-row">
-        <a href="#work" class="hero-cta-primary">See the work</a>
-        <a href="#channel" class="hero-cta-secondary">Watch the process<span class="play-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"></path></svg></span></a>
+        <a href="#work" class="hero-cta-primary">Explore my work</a>
+        <a href="#pixelart" class="hero-cta-secondary">Commission me<span class="play-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"></path></svg></span></a>
       </div>
     </div>
     <div class="scroll-hint">
-      Scroll
+      Let me introduce myself
       <span class="scroll-hint-line"></span>
     </div>
   </header>
@@ -152,9 +152,9 @@
 
       <!-- story -->
       <div class="about-story">
-        <p class="about-lead reveal-words">I'm a solo developer from Italy. Gone from passion to a life style.</p>
-        <p class="about-text reveal-words">It began with curiosity: I observed how things worked, and tried making my own. Curiosity turned into modding, modding turned into real games. Small, humor dense pixel worlds I could call mine.</p>
-        <p class="about-text reveal-words">Now I create experiences and tell it out loud with each devlog, game jam and rough prototype. A life long ongoing project.</p>
+        <p class="about-lead reveal-words">I'm a solo developer from Italy. What began as a passion became a way of life.</p>
+        <p class="about-text reveal-words">It began with curiosity: I observed how things worked, and tried making my own. Curiosity turned into modding games, modding turned into real games. Small, humor dense pixel worlds I could call mine.</p>
+        <p class="about-text reveal-words">Now I create experiences and tell it out loud with each devlog, game jam and rough prototype. A lifelong project still in progress.</p>
         
         <a href="#contact" class="about-link">Want to work together? Let's talk <span class="about-link-arrow">→</span></a>
       </div>
@@ -182,7 +182,7 @@
         <div class="timeline-entry">
           <div class="timeline-year">2019</div>
           <div class="timeline-title">First game prototype</div>
-          <div class="timeline-desc">when the first ideas started turning into reality. Horrible, but real.</div>
+          <div class="timeline-desc">when the first ideas started turning into reality.</div>
         </div>
 
         <!-- 2021 branch -->
@@ -221,7 +221,7 @@
     <div id="work-head">
       <div class="section-head">
         <span class="section-index">02</span>
-        <h2 class="section-heading reveal-words">Selected work</h2>
+        <h2 class="section-heading reveal-words">My personal projects</h2>
       </div>
       <div class="card-nav">
         <button class="cards-scroll-btn left" onclick="{{ scrollLeft }}">←</button>
@@ -279,7 +279,14 @@
       </div>
       <a href="https://it.fiverr.com/kyremworks/create-a-pixel-art-background-scene-for-your-indie-game" target="_blank" rel="noopener" class="fiverr-link">Hire me on Fiverr <span class="fiverr-link-arrow">↗</span></a>
     </div>
-    <p class="pixelart-intro reveal-words">I take commissions for pixel-art environments, from cosy taverns to overgrown labs. The ones here are personal studies, each built to chase a mood, with the full process behind it.</p>
+
+    <p class="pixelart-intro reveal-words">I take commissions for pixel-art environments: I bring your ideas to reality with a visual identity your players won't forget.
+      <br>
+      <br>
+      <a href="#work" class="about-link">See my game projects<span class="about-link-arrow">→</span></a>    <a href="https://www.fiverr.com/kyremworks" target="_blank" rel="noopener" class="fiverr-link">Hire me on Fiverr <span class="fiverr-link-arrow">↗</span></a>
+
+    </p>
+
     <div id="pixelart-grid">
       <sc-for list="{{ commissions }}" as="c" hint-placeholder-count="4">
         <figure class="commission-figure">
