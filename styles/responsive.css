@@ -14,8 +14,9 @@
   #work{padding:90px 0 100px !important}
   #work-head{padding:0 22px !important}
   #pixelart{padding:90px 22px !important}
-  #pixel-head{flex-direction:column;align-items:flex-start !important;gap:18px !important}
-  #pixelart-grid{grid-template-columns:1fr !important}
+  #pixel-head{flex-direction:column;align-items:flex-start !important;gap:18px !important;}
+  .fiverr-link{font-size: 16px;}
+  #pixelart-grid{grid-template-columns:1fr !important;}
   #channel{padding:90px 22px !important}
   #channel-grid{grid-template-columns:1fr !important;gap:36px !important}
   #contact-inner{padding:90px 22px 100px !important}
@@ -26,4 +27,8 @@
 }
 @media (max-width:560px){
   #work .project-card{flex-basis:84vw !important}
+}
+
+@media (max-width: 420px) {
+  .fiverr-link{margin-left: 12px; font-size: 14px;}
 }
