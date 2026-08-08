@@ -42,9 +42,9 @@
         kind: "Long-term",
         desc: "A realistic real-world Minecraft server I've been working on for 5 years. I started out as a builder, but eventually took over the technical side. Today I co-own it: I manage our self-hosted Ubuntu VPS, code custom plugins, and define the project's roadmap.",
         tags: ["In development", "Long-term", "Ubuntu Server", "5 years"],
-        link: "https://glitchvalley.it",
+        link: "https://endlesshorizons.it/",
         linkMsg: "Learn more",
-        img: "assets/glitchvalley-logo.webp",
+        img: "assets/endlesshorizons-logo.webp",
         previewGif: ""
       }
     ],
